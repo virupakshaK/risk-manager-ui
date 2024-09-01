@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePaginationActions from './TablePaginationActions'
 import { TableHead } from '@mui/material';
+import { Box } from '@mui/system';
 
 
 
@@ -51,18 +52,40 @@ import { TableHead } from '@mui/material';
 
 
 
-    return ( <TableContainer component={Paper} sx={{margin: '1%', 
-                                                    maxWidth: 1250, 
-                                                    marginBottom: '3%', 
-                                                    maxHeight: 450, 
-                                                    overflowY: 'auto', }}>
-       <Table sx={{minWidth: 500}} aria-label="custom pagination table" >
-         <TableHead sx={{bgcolor:'#F5F5F5'}}>
+    return (
+      <Box sx={{display: 'flex'}}>
+      <TableContainer component={Paper} sx={{     m: 1,
+                                                  width: '100%',
+                                            
+                                                  maxHeight: '65vh',
+                                                  overflowY: 'auto',
+                                                  overflowX: 'auto',
+                                                  position: 'relative',
+                                                  '&::-webkit-scrollbar': {
+                                                    width: '10px',
+                                                },
+                                                '&::-webkit-scrollbar-thumb': {
+                                                    backgroundColor: '#888',
+                                                    borderRadius: '10px',
+                                                },
+                                                '&::-webkit-scrollbar-thumb:hover': {
+                                                    backgroundColor: '#555',
+                                                
+                                                },
+                                                '&::-webkit-scrollbar-track': {
+                                                    backgroundColor: '#f1f1f1',
+                                                }, }}>
+       <Table sx={{minWidth: 700}} aria-label="custom pagination table" >
+         <TableHead sx={{bgcolor:'#F5F5F5',
+                         position: 'sticky',
+                         top: 0,
+                         zIndex: 1,
+                         }}>
          <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.headerName}
-                  style={{ top: 20 }}
+                  style={{ minWidth: column.width }} // Set minWidth based on column width
                 >
                   {column.headerName}
                 </TableCell>
@@ -101,12 +124,18 @@ import { TableHead } from '@mui/material';
           )}
 
          </TableBody>
-
+         
          <TableFooter>
-          <TableRow>
+          <TableRow sx={{  
+                          bottom: 0,
+                          position: 'sticky',
+                          bgcolor: 'white'
+                          }}>
+                
+          
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
+              colSpan={5}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -122,12 +151,14 @@ import { TableHead } from '@mui/material';
               onRowsPerPageChange={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}
             />
+  
           </TableRow>
         </TableFooter>
-
+   
        </Table>
 
    </TableContainer> 
+   </Box>
     )
 }
 export default DataTable;

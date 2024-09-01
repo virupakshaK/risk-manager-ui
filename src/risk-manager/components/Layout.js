@@ -1,15 +1,25 @@
+import { Box } from "@mui/material";
 import React from "react";
+import Header from "./Header";
+import MainPage from "./MainPage";
 
 
 
 
- function Layout ({children}) {
+ const Layout = () =>  {
 
     return(
-        <div>
-            
-            {children}
-        </div>
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        {/* AppBar/Header */}
+        <Header />
+        
+        {/* Drawer and Main Content Area */}
+        <Box> 
+  
+            <MainPage />
+        
+        </Box>
+      </Box>
     )
 }
 

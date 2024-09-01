@@ -4,10 +4,11 @@ import { Box } from '@mui/system';
 import { AccountCircle, Logout, Search } from '@mui/icons-material';
 import OutseerLogo from '../Images/Outseer_Logo_2.png';
 
+
 const Header = () => {
     
     const outseerLogo = {backgroundImage: `url(${OutseerLogo})`,
-                        height: '62px',
+                        height: '64px',
                         width: '200px',
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat'
@@ -82,7 +83,11 @@ const Header = () => {
     return (
         <React.Fragment>
            
-                <AppBar sx={{background: 'linear-gradient(to bottom, #00995c 50%, #000099 100%)', position: 'fixed'}}>
+                <AppBar sx={{background: 'linear-gradient(to bottom, #00995c 50%, #000099 100%)', 
+                             position: 'sticky',
+                             top: 0, // Ensures it stays at the top of the page
+                             zIndex: (theme) => theme.zIndex.drawer + 1,
+                           }}>
                     <Toolbar>
                         
                           <Box sx={outseerLogo}>

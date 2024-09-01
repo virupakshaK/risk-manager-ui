@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import { Avatar, Button, Grid, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-import Background from './Images/outseer_background.jpg'; // Import using relative path
-import LoginLogo from './Images/tree-simple.png';
-import Shield from './Images/Shield.png';
+import Background from '../Images/outseer_background.jpg'; // Import using relative path
+import LoginLogo from '../Images/tree-simple.png';
+import Shield from '../Images/Shield.png';
 import { styled } from '@mui/material/styles';
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
-import { color } from "@mui/system";
-
-
-  
-
-
 
 
 const styles = {
@@ -40,10 +34,26 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({username : '',
+                                 password : ''})
+
+                  
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleSubmit = () => {
+  const handleCredentials = (e) =>{
+    setCredentials((prev) => {
+         console.log('value name:'+e.target.u);
+         return ({...prev,
+          [e.target.name] : e.target.value
+        })
+    })
+  }
 
+
+
+  const handleSubmit = () => {
+     console.log('userName:'+ credentials.username);
+     console.log('Password:'+credentials.password);
   }
   const paperStyle = { padding: 20, height: '65vh', width: 700, borderRadius: '10px', margin: '50px 250px' }
   const avatarStyle = { backgroundColor: '#2e7d32' }
@@ -71,22 +81,29 @@ const Login = () => {
       <Paper elevation={10} style={paperStyle}>
 
         <Grid container flexDirection={"row"} display={"flex"} >
+
+
           <Grid md={6} container flexDirection={"column"}  display={"flex"} alignItems={"center"}>
-            <Grid  flexDirection={"row"} display={"flex"} >
+            <Grid  md={2} flexDirection={"row"} display={"flex"} >
                  <IconButton style={shieldLogo}></IconButton>
                 <Typography  variant="h5" sx={{color: '#2e7d32'}}>OUTSEER</Typography>
             </Grid>
             <Grid  style={loginLogo} md={10} >
-            
-          </Grid>
+              
+            </Grid>
           </Grid>
           
           <Grid md={6} display="flex" flexDirection={"column"} alignItems={"center"}>
             
+
+
               <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>
               <h2>Sign In</h2>
            
-              <TextField  margin="normal" type={"text"} label="Username" placeholder="Enter user name" variant="outlined" sx={textFieldStyle} 
+
+              <form>
+
+              <TextField name='username' margin="normal" type={"text"} label="Username" placeholder="Enter user name" variant="outlined" sx={textFieldStyle} 
               
               InputProps={{
                 endAdornment: (
@@ -95,8 +112,8 @@ const Login = () => {
                   </InputAdornment>
                 ),
               }}
-              required />
-              <TextField  margin="normal" type={showPassword? "text" : "password"} label="Password"  placeholder="Enter password" variant="outlined" sx={textFieldStyle}
+              required onChange={handleCredentials} />
+              <TextField  name="password" margin="normal" type={showPassword? "text" : "password"} label="Password"  placeholder="Enter password" variant="outlined" sx={textFieldStyle}
               
               InputProps={{
                 endAdornment: <InputAdornment position="end">
@@ -109,12 +126,13 @@ const Login = () => {
                        </IconButton>
                 </InputAdornment>,
               }}
- required
+                required
+                onChange={handleCredentials}
               />
 
-              <Button variant="contained" color="success" sx={btnStyle} >Login</Button>
+              <Button variant="contained" color="success" sx={btnStyle} onClick={handleSubmit}>Login</Button>
             
-
+              </form>
 
           </Grid>
 
