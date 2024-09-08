@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment } from '@mui/material';
 import { Box } from '@mui/system';
 import { AccountCircle, Logout, Search } from '@mui/icons-material';
-import OutseerLogo from '../Images/Outseer_Logo_2.png';
-
+import OutseerLogo from '../Images/Outseer_Logo_3.jpg'
 
 const Header = () => {
     
     const outseerLogo = {backgroundImage: `url(${OutseerLogo})`,
-                        height: '64px',
-                        width: '200px',
+                        height: '55px',
+                        width: '180px',
                         backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat'
+                        backgroundRepeat: 'no-repeat',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                         }
 
     const tabsList = ['AccessManagement', 'CaseManagement', 'BackOffice', 'Admin'];

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import DataTable from "./DataTable";
 import LeftDrawerMenu from "./access-management/LeftDrawerMenu";
+import { AddRule } from "./AddRule";
 
 const drawerWidth = 240; // Width of the drawer when opened
 const minimizedWidth = 60; // Width of the drawer when minimized
@@ -42,7 +43,7 @@ const MainPage = () => {
             <Typography variant="h6" sx={{pt: '5px', px: 1}}> Main content</Typography>
 
              <Grid container flexDirection={"column"} sx={{ flexGrow: 1, overflow: 'hidden' }}>
-             <DataTable /> 
+             <AddRule /> 
               
              </Grid>
            </Paper>

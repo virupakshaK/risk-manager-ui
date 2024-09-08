@@ -18,7 +18,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import GroupsIcon from '@mui/icons-material/Groups';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import Tooltip from '@mui/material/Tooltip';
 
 
 const drawerWidth = 240;
@@ -116,19 +121,25 @@ const LeftDrawerMenu = ({open, onToggleDrawer }) => {
                                   marginTop: appBarHeight, // Push down the Drawer to start below the AppBar
                                 },
                               }}>
-    <DrawerHeader>
-      {open ? (<IconButton onClick={handleDrawerClose}> 
-          <MenuOpenIcon />
-      </IconButton>):
-      
-      <IconButton onClick={handleDrawerOpen}>
-      <ChevronRightIcon />
-      </IconButton> }
-      
-    </DrawerHeader>
+            <DrawerHeader>
+                {open ? (
+                  <Tooltip title="Collapse">
+                    <IconButton onClick={handleDrawerClose}>
+                      <MenuOpenIcon />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Expand">
+                    <IconButton onClick={handleDrawerOpen}>
+                      <ChevronRightIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
+          </DrawerHeader>
+
     <Divider />
     <List>
-      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+      {['Users', 'Roles', 'Groups', 'Orgs'].map((text, index) => (
         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
           <ListItemButton
             sx={{
@@ -144,7 +155,10 @@ const LeftDrawerMenu = ({open, onToggleDrawer }) => {
                 justifyContent: 'center',
               }}
             >
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index  === 0  && <SupervisedUserCircleIcon /> }
+              {index  === 1  && <SwitchAccessShortcutAddIcon /> }
+              {index  === 2  && <GroupsIcon /> }
+              {index  === 3  && <HomeWorkIcon /> }
             </ListItemIcon>
             <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
@@ -153,7 +167,7 @@ const LeftDrawerMenu = ({open, onToggleDrawer }) => {
     </List>
     <Divider />
     <List>
-      {['All mail', 'Trash', 'Spam'].map((text, index) => (
+      {['Menu-1', 'Menu-2', 'Meenu-3'].map((text, index) => (
         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
           <ListItemButton
             sx={{
