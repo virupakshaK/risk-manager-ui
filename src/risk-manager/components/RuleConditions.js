@@ -137,10 +137,10 @@ const RuleConditions = () => {
     ));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     // Convert query to JSON string
     const queryPayload = JSON.stringify(query);
-    
+    e.preventDefault();
     // Send the payload to the backend service
    { /*axios.post('https://your-backend-api.com/query', queryPayload, {
       headers: {

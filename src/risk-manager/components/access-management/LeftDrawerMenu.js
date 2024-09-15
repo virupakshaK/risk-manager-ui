@@ -18,12 +18,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import HomeWorkIcon from '@mui/icons-material/HomeWork';
-import GroupsIcon from '@mui/icons-material/Groups';
-import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
+import AccessMangementMenu from './AccessMangementMenu';
+import CaseManagementMenu from '../case-management/CaseManagementMenu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Tooltip from '@mui/material/Tooltip';
+import { useTabContext } from '../TabContext';
+import BackOfficeMenu from '../backoffice/BackOfficeMenu';
+import AdminMenu from '../admin/AdminMenu';
 
 
 const drawerWidth = 240;
@@ -96,7 +97,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const LeftDrawerMenu = ({open, onToggleDrawer }) => {
 
-
+  
+    
+  
+  const { activeTab } = useTabContext(); // Access the activeTab state
   //const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -139,31 +143,10 @@ const LeftDrawerMenu = ({open, onToggleDrawer }) => {
 
     <Divider />
     <List>
-      {['Users', 'Roles', 'Groups', 'Orgs'].map((text, index) => (
-        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              {index  === 0  && <SupervisedUserCircleIcon /> }
-              {index  === 1  && <SwitchAccessShortcutAddIcon /> }
-              {index  === 2  && <GroupsIcon /> }
-              {index  === 3  && <HomeWorkIcon /> }
-            </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
-      ))}
+      {activeTab === 0 && <AccessMangementMenu open={open} />}
+      {activeTab === 1 && <CaseManagementMenu open={open} />}
+      {activeTab === 2 && <BackOfficeMenu open={open} />}
+      {activeTab === 3 && <AdminMenu open={open} />}
     </List>
     <Divider />
     <List>

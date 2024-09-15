@@ -6,6 +6,8 @@ import TitileLogo from '../Images/Outseer_Logo_1.jpg'
 import Shield from '../Images/Shield.png';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+
 const styles = {
     paperContainer: {
       flexGrow: 1,
@@ -22,13 +24,16 @@ const styles = {
   };
 
 
-export const Auth = () => {
+export const Auth = (props) => {
+      const navigate = useNavigate();
       const [credentials, setCredentials] = useState({
                                                             username: '',
                                                             password: ''
                                                         })
       const [showPassword, setShowPassword] = useState(false);
       const [error, setError] = useState('');
+
+      
 
       const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -37,12 +42,47 @@ export const Auth = () => {
                                                         [e.target.name] : e.target.value 
                                                         }))
                                        } 
+
+
+
+
       const handleLoginSubmit = (e) => {
           e.preventDefault();
           console.log('User Name:'+ credentials.username);
           console.log('Password:'+ credentials.password);
+
+        var apiBaseUrl = "https://myapi.com/auth/"
+        //const payload = {...};
+        const { username, password } = credentials;
+        const { history } = props; // <-- destructure history from props
+        //this.props.history.push("/");
+        
+
+// After your login action you can redirect with this command:
+           navigate('/main');
+        //if (username && password) {
+            // {fetch(apiBaseUrl + 'login', payload)
+            //     .then((response) => {
+            //         ...
+            //     }).then((data) => {
+            //       setCredentials({
+            //             accessToken: data.accestToken,
+            //             authenticated: data.authenticated
+            //         });
+            //         localStorage.setItem('accessToken', data.accessToken);
+            //         if (data.authenticated === true) {
+            //             console.log(this.props)
+            //             this.props.history.push("/"); // <-- navigate!
+            //         }
+
+            //     })
+            //     .catch((err) => console.log(err));
+//}        }else {
+            //console.log("Cannot be Empty");
+       // }
+    
       }
-      const paperStyle = { padding: 20, height: '60vh', width: 830, borderRadius: '10px', margin: 'auto' }
+      const paperStyle = { padding: 20, height: '70vh', width: 830, borderRadius: '10px', margin: 'auto' }
       const avatarStyle = { backgroundColor: '#2e7d32',                            
                             display: 'flex',               // Use flexbox to center content if needed
                             alignItems: 'center',          // Center items vertically (if using flex items)
@@ -91,10 +131,10 @@ export const Auth = () => {
     <div>
       <Grid container style={styles.paperContainer} alignItems="center" justifyContent="center">  
       <Paper elevation={4} style={paperStyle}>    
-      <Grid container spacing={2}>   
+      <Grid container >   
 
              {/* Left side with logos */}
-            <Grid item xs={12} md={6} container direction="column" alignItems="center" justifyContent="center">
+            <Grid item xs={12} md={6} container direction="column" alignItems="center" justifyContent="center" sx={{pr: '15px', height: '70vh'}}>
                    <Card elevation={8} sx={{width: '100%', height: '100%'}}>
                        <Grid ><IconButton style={shieldLogo}></IconButton></Grid> 
 
@@ -108,7 +148,7 @@ export const Auth = () => {
 
 
                 {/* Right side with form */}
-                <Grid item xs={12} md={6} container direction="column" alignItems="center" justifyContent="center" >  
+                <Grid item xs={12} md={6} container direction="column" alignItems="center" justifyContent="center" sx={{pr:'3px', height: '70vh'}}>  
                  
                 <Card elevation={8} sx={{width: '100%', height: '100%'}}>
                   <Grid item >  
@@ -117,8 +157,8 @@ export const Auth = () => {
                         </IconButton>
                         <Typography variant="h5" gutterBottom>Sign In</Typography>
                         </Grid>
-                        <Grid item >
-                            {error &&  <Typography variant='h7' color="red">waring message</Typography>}
+                        <Grid item sx={{mb: '5px'}}>
+                            {error &&  <Typography variant='h7' color="red">{error}</Typography>}
                            
                         </Grid>
                     

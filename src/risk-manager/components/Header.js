@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment } from '@mui/material';
+import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment, Chip } from '@mui/material';
 import { Box } from '@mui/system';
 import { AccountCircle, Logout, Search } from '@mui/icons-material';
 import OutseerLogo from '../Images/Outseer_Logo_3.jpg'
+import { useTabContext } from './TabContext';
+import SettingsPowerIcon from '@mui/icons-material/SettingsPower';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     
@@ -12,12 +15,14 @@ const Header = () => {
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        marginLeft: 2
                         }
 
     const tabsList = ['AccessManagement', 'CaseManagement', 'BackOffice', 'Admin'];
     const settings = ['default', 'TestOrgShc', "bbh", "bbc", 'testOrgSch1btestOutseer'];
-    const [value, setValue] = useState(0);
+    //const [activeTab, setActiveTab] = useState(0);
+    const { activeTab, setActiveTab } = useTabContext(); // Access the activeTab and setActiveTab
     const [org, setOrg] = useState('default');
     const truncatedText = org.length > 10 ? org.slice(0, 10) + '...' : org;
     const [anchorEl, setAnchorEl] = useState(null);
@@ -25,7 +30,7 @@ const Header = () => {
     const [searchOrg, setSearchOrg] = useState('');
     const [orgs, setOrgs] = useState(settings);
     const inputRef = useRef(null); // Create a ref for the input field
-   
+    const navigate = useNavigate();
     const handleClose = () => {
         setAnchorEl(null);
         setOpen(false);
@@ -48,6 +53,7 @@ const Header = () => {
         console.log('handle logout')
         setAnchorEl(null);
         setOpen(false);
+        navigate('/login');
     }
 
     const searchOrgName = (e) => {
@@ -95,7 +101,7 @@ const Header = () => {
 
                           </Box>
                        
-                            <Tabs  sx={{marginLeft: 48}} value={value} onChange={(e, value) => setValue(value)} aria-label="basic tabs example"  indicatorColor='secondary'>
+                            <Tabs  sx={{marginLeft: 48}} value={activeTab} onChange={(e, value) => setActiveTab(value)} aria-label="basic tabs example"  indicatorColor='secondary'>
                            {tabsList.map((tabText, index) => (<Tab key={index} label={<span style={{ color: 'white' }}>{tabText}</span> }  />) )} 
                             </Tabs>
 
@@ -143,13 +149,17 @@ const Header = () => {
                                     open={Boolean(open)}
                                     onClose={handleClose}
                                     >
-   
-                                     <MenuItem onClick={handleLogout}>
-                                        <ListItemIcon sx={{color: 'red'}}>
-                                            <Logout  fontSize="small" />
+                                   
+                                     
+                                     <MenuItem onClick={handleLogout} >
+                                     <Typography sx={{justifyContent: 'flex-start'}}> Logged In: Admin</Typography>
+                                     <Tooltip title="Logout">
+                                        <ListItemIcon  sx={{ ml: 3}}>
+                                            <SettingsPowerIcon fontSize='large' />
                                         </ListItemIcon>
-                                        <Typography sx={{color: 'red'}}>Logout</Typography>
+                                        </Tooltip>
                                     </MenuItem>
+                                    
                                     <Divider />
                             <TextField
                                         inputRef={inputRef}  // Attach the ref to the TextField
@@ -162,7 +172,7 @@ const Header = () => {
                                        
                                         name='searchItem'
                                         value={searchOrg}
-                                        style={{ margin: '8px', width: '200px' }}
+                                        style={{ margin: '5px', width: '215px' }}
                                         InputProps={{
                                             endAdornment: (
                                               <InputAdornment position="end">
@@ -193,25 +203,24 @@ const Header = () => {
                                      }    
                                 </Menu>
                     </Toolbar>
-                    <Paper  elevation={16} 
-                     sx={{
-                        display: 'flex',
+           
+
+                    
+                    <Tooltip title={org}>
+                   
+
+                     <Chip sx={{  display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: '20px',  // Set a height for the Paper component
                         width: '150px',
-                        marginLeft: 'auto',
-                        marginRight: '3px',   // Optional: margin around the Paper
+                        marginLeft: '',
+                        marginRight: 'auto',   // Optional: margin around the Paper
                         marginBottom: '3px',
-                        bgcolor: '#00995c'
-                      }}
-                    >  
-
-                    
-                    <Tooltip title={org}>
-                     <Typography variant='h7' sx={{color: 'white',  fontWeight: '500', pl: '2px', pr:'3px'}} noWrap>Org: {truncatedText}</Typography>
+                        bgcolor: 'rgb(0 153 92)',
+                        color: 'white'}} label={'Org: '+truncatedText} />                             
                      </Tooltip>
-                    </Paper >
+                    
                     
                 </AppBar>
                 
