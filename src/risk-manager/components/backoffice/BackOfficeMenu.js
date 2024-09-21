@@ -13,6 +13,7 @@ const BackOfficeMenu = ({open}) => {
     const backOfficeMenuList = [{titile:'Policy Manager', icon: PolicyIcon, subMenu: [
                                                                                     { title: 'List Users', icon: PlaylistAddCircleIcon, path:'/main/listusers'},
                                                                                     { title: 'List rules', icon: PlaylistAddCircleIcon, path:'/main/listrules'},
+                                                                                    { title: 'User activites', icon: PlaylistAddCircleIcon, path:'/main/useActivities'}
                                                                                   ]},
                                 {titile:'Audit Trail', icon:AutoStoriesIcon, path:'/main/audittrail'}, 
                                 {titile:'configuration', icon:PermDataSettingIcon, path: '/main/configuration'}, 

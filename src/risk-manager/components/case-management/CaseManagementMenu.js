@@ -9,7 +9,8 @@ const CaseManagementMenu = ({open}) => {
     const caseManagementMenuList = [{title:'Process Queue', icon:AutoAwesomeMotionIcon, path:'/processqueue'}, 
                                     {title:'Custom Queue', icon:DynamicFeedIcon, path:'/customqueue'}, 
                                     {title:'Lookup User', icon:PersonSearchIcon, path:'/lookupuser'}, 
-                                    {title:'Manage', icon:DashboardCustomizeIcon, path:'/manage'}
+                                    {title:'Manage', icon:DashboardCustomizeIcon, path:'/manage'},
+                                    {title:'Research Activities', icon:DashboardCustomizeIcon, path:'/manage'}
                                   ];
 
 

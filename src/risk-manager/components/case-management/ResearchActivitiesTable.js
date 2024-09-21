@@ -1,59 +1,69 @@
-import React, {useState} from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TablePaginationActions from './TablePaginationActions'
-import { TableHead } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel } from '@mui/material';
 import { Box } from '@mui/system';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
-
-
-  const columns = [
+const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
-    { field: 'age', headerName: 'Age', type: 'number', width: 90},
-    { field: 'fullName', headerName: 'Full name', description: 'It is not sortable.', sortable: false, width: 160, valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}` },
+    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'salary', headerName: 'Salary', width: 130 },
   ];
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 34 },
-    { id: 6, lastName: 'Melisandre', firstName: 'Virupaksha', age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-  
 
- const DataTable = () => {
-  
+export const ResearchActivitiesTable = () => {
+
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [hasMore, setHasMore] = useState(true);
+  const [sortColumn, setSortColumn] = useState('if');  // Default sorting column
+  const [sortDirection, setSortDirection] = useState('asc'); // Default sorting order
 
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows = hasMore ? 0 : Math.max(0, rowsPerPage - data.length);
 
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
+  useEffect(() => {
+    fetchData(page, rowsPerPage, sortColumn, sortDirection);
+  }, [page, rowsPerPage, sortColumn, sortDirection]);
 
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
+  const fetchData = async (page, limit, sortColumn, sortDirection) => {
+    const offset = page * limit;
+    // Call backend API with limit, offset, sortColumn, and sortDirection
+    //const response = await fetch(`http:localhost:8181/emp/data/${limit}/${offset}/${sortColumn}/${sortDirection}`);
+    try {
+        // Make the request using path variables
+        const response = await axios.get(`http://localhost:8181/emp/data/${limit}/${offset}/${sortColumn}/${sortDirection}`);
+        
+        console.log('response:'+response)
+        // Process the response data
+        const result = response.data;
+        console.log(result.data);
+        // Assuming you're updating state (if using React)
+        setData(result.data);
+        setHasMore(result.hasMore);
+    
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
 
 
+  };
 
-    return (
-      <Box sx={{display: 'flex'}}>
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when rows per page changes
+  };
+
+  const handleRequestSort = (property) => {
+    const isAsc = sortColumn === property && sortDirection === 'asc';
+    setSortDirection(isAsc ? 'desc' : 'asc');
+    setSortColumn(property);
+  };
+  return (
+    <Box sx={{display: 'flex'}}>
       <TableContainer component={Paper} sx={{     m: 1,
                                                   width: '100%',
                                             
@@ -87,7 +97,15 @@ import { Box } from '@mui/system';
                   key={column.headerName}
                   style={{ minWidth: column.width }} // Set minWidth based on column width
                 >
-                  {column.headerName}
+                   <TableSortLabel
+                        active={sortColumn === column.headerName}
+                        direction={sortColumn === column.headerName ? sortDirection : 'asc'}
+                        onClick={() => handleRequestSort(column.headerName)}
+              >
+               {column.headerName}
+              </TableSortLabel>
+
+                  
                 </TableCell>
               ))}
             </TableRow>
@@ -95,31 +113,22 @@ import { Box } from '@mui/system';
          </TableHead>
 
          <TableBody>
-         {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
+         {data.map((row) => (
             <TableRow key={row.id} >
               <TableCell scope='row'>
                 {row.id}
               </TableCell>
               <TableCell scope="row">
-                {row.firstName}
+                {row.name}
               </TableCell>
               <TableCell   scope="row">
-                {row.lastName}
-              </TableCell>
-              <TableCell scope="row">
-                {row.age}
-              </TableCell>
-              <TableCell  scope="row">
-                {row.firstName}
+                {row.salary}
               </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell align='center' colSpan={3} >Records are not available </TableCell>
             </TableRow>
           )}
 
@@ -134,9 +143,9 @@ import { Box } from '@mui/system';
                 
           
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={5}
-              count={rows.length}
+              rowsPerPageOptions={[5, 10, 25, 50]}
+              colSpan={3}
+              count={hasMore ? -1 : page * rowsPerPage + data.length}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{
@@ -149,8 +158,9 @@ import { Box } from '@mui/system';
               }}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-    
+              nextIconButtonProps={{ disabled: !hasMore }} // Disable next if no more data
+              shape="rounded"
+              variant='outlined'
             />
   
           </TableRow>
@@ -160,6 +170,5 @@ import { Box } from '@mui/system';
 
    </TableContainer> 
    </Box>
-    )
+  )
 }
-export default DataTable;
