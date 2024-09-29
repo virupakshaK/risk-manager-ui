@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment, Chip } from '@mui/material';
-import { Box } from '@mui/system';
+import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment, Chip, Badge } from '@mui/material';
+import { Box, color } from '@mui/system';
 import { AccountCircle, Logout, Search } from '@mui/icons-material';
 import OutseerLogo from '../Images/Outseer_Logo_3.jpg'
 import { useTabContext } from './TabContext';
 import SettingsPowerIcon from '@mui/icons-material/SettingsPower';
 import { useNavigate } from 'react-router-dom';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 const Header = () => {
     
@@ -86,7 +88,6 @@ const Header = () => {
             }
           }, [orgs]); // Only trigger useEffect when the menu is opened
   
-
     return (
         <React.Fragment>
            
@@ -204,24 +205,46 @@ const Header = () => {
                                 </Menu>
                     </Toolbar>
            
+                    <Box 
+                          sx={{ 
+                            position: 'relative', 
+                            minHeight: '25px', 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'space-between'  // Ensure items are spaced appropriately
+                          }}
+                        >
+                           <Tooltip title={org}>
+                                <Chip
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: '20px',
+                                        width: '150px',
+                                        bgcolor: 'rgb(0 153 92)',
+                                        color: 'white',
+                                        zIndex: 1  // Ensure Chip is visible above other elements
+                                    }}
+                                    label={'Org: ' + truncatedText}
+                                />
+                           
+                           
+                            </Tooltip>
+                             {/* Render Badge in the same row as Chip */}
+                            { false &&
+                                      <Tooltip title="notification">
+                                      <IconButton sx={{ mr: 30, color: 'primary'}}>
+                                          <Badge badgeContent={4} color="secondary" variant=''>
+                                            <MailIcon fontSize='small' color="primary"  />
+                                          </Badge>
+                                      </IconButton>
+                                      </Tooltip>
+                                }
+                            </Box>
 
                     
-                    <Tooltip title={org}>
-                   
-
-                     <Chip sx={{  display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '20px',  // Set a height for the Paper component
-                        width: '150px',
-                        marginLeft: '',
-                        marginRight: 'auto',   // Optional: margin around the Paper
-                        marginBottom: '3px',
-                        bgcolor: 'rgb(0 153 92)',
-                        color: 'white'}} label={'Org: '+truncatedText} />                             
-                     </Tooltip>
-                    
-                    
+                                      
                 </AppBar>
                 
         </React.Fragment>

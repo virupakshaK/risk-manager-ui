@@ -59,7 +59,7 @@ export const Auth = (props) => {
         
 
 // After your login action you can redirect with this command:
-           navigate('/main');
+           navigate('/accessmanagement');
         //if (username && password) {
             // {fetch(apiBaseUrl + 'login', payload)
             //     .then((response) => {

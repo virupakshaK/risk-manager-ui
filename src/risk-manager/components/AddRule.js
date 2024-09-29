@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Card } from '@mui/material';
 import RuleConditions from './RuleConditions';
-const steps = ['Define rule', 'Create rule conditions', 'Review the rule details'];
+import { RuleInfo } from './backoffice/RuleInfo';
+const steps = ['Define Rule', 'Conditions', 'Actions'];
 
 
 export const AddRule = () => {
@@ -106,7 +107,7 @@ export const AddRule = () => {
           <Typography sx={{ mt: 1, mb: 1, py: 1 }}>
 
           
-            {activeStep === 1 ? <RuleConditions /> : "Step" +(activeStep+1)}
+            {activeStep === 1 ? <RuleConditions /> : <RuleInfo />}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb:'20px' }}>
             <Button

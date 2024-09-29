@@ -10,14 +10,18 @@ import { Link } from 'react-router-dom';
 
 const BackOfficeMenu = ({open}) => {
     
-    const backOfficeMenuList = [{titile:'Policy Manager', icon: PolicyIcon, subMenu: [
-                                                                                    { title: 'List Users', icon: PlaylistAddCircleIcon, path:'/main/listusers'},
-                                                                                    { title: 'List rules', icon: PlaylistAddCircleIcon, path:'/main/listrules'},
-                                                                                    { title: 'User activites', icon: PlaylistAddCircleIcon, path:'/main/useActivities'}
+    const backOfficeMenuList = [{title:'Policy Manager', icon: PolicyIcon, subMenu: [
+                                                                                    { title: 'Manage Rules', icon: PlaylistAddCircleIcon, path:'/backoffice/listrules'},
+                                                                                    { title: 'Manage Lists', icon: PlaylistAddCircleIcon, path:'/backoffice/manageLists'},
+                                                                                    { title: 'Manage Custom Facts', icon: PlaylistAddCircleIcon, path:'/backoffice/useActivities'},
+                                                                                    { title: 'Manage Custom Event Types', icon: PlaylistAddCircleIcon, path:'/backoffice/permissionsList'},
+                                                                                    { title: 'Audit Trail', icon:AutoStoriesIcon, path:'/backoffice/audittrail'}
                                                                                   ]},
-                                {titile:'Audit Trail', icon:AutoStoriesIcon, path:'/main/audittrail'}, 
-                                {titile:'configuration', icon:PermDataSettingIcon, path: '/main/configuration'}, 
-                                {titile:'Settings', icon:SettingsIcon, path: '/main/settings'}
+                                 
+                                {title:'Administration', icon:PermDataSettingIcon, subMenu: [{title: 'Manage Configuration', icon: PlaylistAddCircleIcon, path:'/backoffice/configuration'},
+                                                                                             {title: 'Key Rotation', icon: PlaylistAddCircleIcon, path:'/backoffice/keyRotation'}]}, 
+                                {title:'Customer Service', icon:SettingsIcon, path: '/backoffice/customerService'},
+                                {title:'Reports', icon:SettingsIcon, path: '/backoffice/reports'}
                               ]
     const [expandedMenu, setExpandedMenu] = useState(null);
     const handleClick = (index) => {
@@ -25,6 +29,8 @@ const BackOfficeMenu = ({open}) => {
       setExpandedMenu(expandedMenu === index ? null : index);
     };
   return (
+    <>
+    <List>{
     backOfficeMenuList.map((item, index) => (
         <ListItem key={index} disablePadding sx={{ display: 'block' }}>
          {/* Check if the item has subMenu */}
@@ -49,7 +55,7 @@ const BackOfficeMenu = ({open}) => {
             {item.icon && <item.icon />}   
              
            </ListItemIcon>
-           <ListItemText primary={item.titile} sx={{ opacity: open ? 1 : 0 }} />
+           <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
            {/* Add expand/collapse icon only if there are sub-menu items */}
            {item.subMenu && (expandedMenu === index ? <ExpandLess /> : <ExpandMore />)}
          </ListItemButton>) 
@@ -72,12 +78,10 @@ const BackOfficeMenu = ({open}) => {
             {item.icon && <item.icon />}   
              
            </ListItemIcon>
-           <ListItemText primary={item.titile} sx={{ opacity: open ? 1 : 0 }} />
+           <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
            {/* Add expand/collapse icon only if there are sub-menu items */}
            {item.subMenu && (expandedMenu === index ? <ExpandLess /> : <ExpandMore />)}
          </ListItemButton>)}
-
-
 
 
          {/* Collapsible Sub-menu */}
@@ -88,7 +92,7 @@ const BackOfficeMenu = ({open}) => {
                 <ListItem key={subIndex} disablePadding sx={{ pl: 4 }}>
                   <ListItemButton component={Link} to={subItem.path}>
                     <ListItemIcon>
-                      {subItem.icon && <subItem.icon />}
+                      {subItem.icon && <subItem.icon fontSize='medium' />}
                     </ListItemIcon>
                     <ListItemText primary={subItem.title} />
                   </ListItemButton>
@@ -101,6 +105,9 @@ const BackOfficeMenu = ({open}) => {
       
        
      ))
+              }
+              </List>
+              </>
   );
 };
 export default BackOfficeMenu;
