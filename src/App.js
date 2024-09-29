@@ -7,7 +7,6 @@ import DataTable from './risk-manager/components/DataTable.js';
 import { PageNotFound } from './risk-manager/components/PageNotFound.js';
 import { ResearchActivitiesTable } from './risk-manager/components/case-management/ResearchActivitiesTable.js';
 import { TransferList } from './risk-manager/components/TransferList.js';
-import { RuleInfo } from './risk-manager/components/backoffice/RuleInfo.js';
 
 //import Login from './risk-manager/Login.js';
 const App = () => {

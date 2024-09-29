@@ -65,6 +65,19 @@ export const AddRule = () => {
       };
     
 
+      const getStepContent = (step) => {
+        switch (step) {
+          case 0:
+            return <RuleInfo />;
+          case 1:
+            return <RuleConditions />;
+          case 2:
+            return 'Step 3';
+          default:
+            return <Typography>Unknown Step</Typography>;
+        }
+      };
+
   return (
     <Box sx={{ width: '100%' }}>
         <Card sx={{ m: 1,
@@ -106,8 +119,8 @@ export const AddRule = () => {
      
           <Typography sx={{ mt: 1, mb: 1, py: 1 }}>
 
-          
-            {activeStep === 1 ? <RuleConditions /> : <RuleInfo />}
+
+            {getStepContent(activeStep)}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb:'20px' }}>
             <Button
