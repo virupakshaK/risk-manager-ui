@@ -1,7 +1,8 @@
+import React, { useEffect, useState } from 'react'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import useBreakpoints from '../useBreakpoints';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -10,7 +11,7 @@ const columns = [
   ];
 
 export const ResearchActivitiesTable = () => {
-
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -64,10 +65,10 @@ export const ResearchActivitiesTable = () => {
   };
   return (
     <Box sx={{display: 'flex'}}>
-      <TableContainer component={Paper} sx={{     m: 1,
+      <TableContainer                   sx={{     m: 1,
                                                   width: '100%',
-                                            
-                                                  maxHeight: '65vh',
+                                                  height: isMd ? '65vh' : isLg ? '79vh' : '70%',
+                                                  maxHeight: isMd ? '80vh': isLg ? '85vh' : '85vh',
                                                   overflowY: 'auto',
                                                   overflowX: 'auto',
                                                   position: 'relative',
@@ -85,7 +86,7 @@ export const ResearchActivitiesTable = () => {
                                                 '&::-webkit-scrollbar-track': {
                                                     backgroundColor: '#f1f1f1',
                                                 }, }}>
-       <Table sx={{minWidth: 700}} aria-label="custom pagination table" >
+       <Table sx={{minWidth: 700}} component={Paper} aria-label="custom pagination table" >
          <TableHead sx={{bgcolor:'#F5F5F5',
                          position: 'sticky',
                          top: 0,

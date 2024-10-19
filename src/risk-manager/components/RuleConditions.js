@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, Box, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Tooltip } from '@mui/material';
+import { TextField, Button, Select, MenuItem, Box, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Tooltip, createTheme } from '@mui/material';
 //import axios from 'axios';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import useBreakpoints from './useBreakpoints';
 
 const operators = ["AND", "OR"];
 const fields = ["Name", "Age", "Country"];
 const conditions = ["Equals", "Not Equals", "Contains"];
 
 const RuleConditions = () => {
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const [query, setQuery] = useState({ id: 1, conditions: [] });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [itemToRemove, setItemToRemove] = useState(null);
@@ -48,6 +50,21 @@ const RuleConditions = () => {
 
 
   const renderConditions = (group) => {
+
+    const theme = createTheme({
+      breakpoints: {
+          values: {
+            xs: 0,
+            sm: 600,
+            md: 1281,
+            lg: 1981,
+            xl: 1990,
+          },
+      },
+  });
+
+
+
     return group.conditions.map((q, index) => (
       <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
         {"group" in q ? (
@@ -158,8 +175,8 @@ const RuleConditions = () => {
   return (
     <Box sx={{    
       width: '95%',
-      height: '40%',
-      maxHeight: '40vh',
+      height: isMd ? '40%' : isLg ? '50%' : '60%',
+      maxHeight: isMd ? '40vh' : isLg ? '56vh' : '65vh',
       overflowY: 'auto',
       overflowX: 'auto',
       position: 'relative',

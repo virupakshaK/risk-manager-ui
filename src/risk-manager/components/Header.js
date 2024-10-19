@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AppBar, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography, Menu, MenuItem, ListItemIcon, Divider, TextField, Paper, InputAdornment, Chip, Badge } from '@mui/material';
-import { Box, color } from '@mui/system';
-import { AccountCircle, Logout, Search } from '@mui/icons-material';
+import { Box} from '@mui/system';
+import { AccountCircle, Search } from '@mui/icons-material';
 import OutseerLogo from '../Images/Outseer_Logo_3.jpg'
 import { useTabContext } from './TabContext';
 import SettingsPowerIcon from '@mui/icons-material/SettingsPower';
 import { useNavigate } from 'react-router-dom';
 import MailIcon from '@mui/icons-material/Mail';
-
+import useBreakpoints from './useBreakpoints';
 
 const Header = () => {
-    
-    const outseerLogo = {backgroundImage: `url(${OutseerLogo})`,
-                        height: '55px',
-                        width: '180px',
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginLeft: 2
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
+    const outseerLogo = { backgroundImage: `url(${OutseerLogo})`,
+                          height: '55px',
+                          width: '180px',
+                          backgroundSize: 'contain',
+                          backgroundRepeat: 'no-repeat',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginLeft: 2
                         }
 
     const tabsList = ['AccessManagement', 'CaseManagement', 'BackOffice', 'Admin'];
@@ -95,6 +95,7 @@ const Header = () => {
                              position: 'sticky',
                              top: 0, // Ensures it stays at the top of the page
                              zIndex: (theme) => theme.zIndex.drawer + 1,
+                             height: isMd ? '15%': isLg ? '10%' : '10%'
                            }}>
                     <Toolbar>
                         
@@ -102,7 +103,7 @@ const Header = () => {
 
                           </Box>
                        
-                            <Tabs  sx={{marginLeft: 48}} value={activeTab} onChange={(e, value) => setActiveTab(value)} aria-label="basic tabs example"  indicatorColor='secondary'>
+                            <Tabs  sx={{marginLeft: isMd ? 48 : isLg ? 100 : 100 }} value={activeTab} onChange={(e, value) => setActiveTab(value)} aria-label="basic tabs example"  indicatorColor='secondary'>
                            {tabsList.map((tabText, index) => (<Tab key={index} label={<span style={{ color: 'white' }}>{tabText}</span> }  />) )} 
                             </Tabs>
 
@@ -135,6 +136,7 @@ const Header = () => {
                                                                             backgroundColor: '#f1f1f1',
                                                                         },                              
                                                      }}}
+
                                     sx={{ mt: '45px' }}
                                     id="menu-appbar"
                                     anchorEl={anchorEl}
@@ -191,7 +193,7 @@ const Header = () => {
                                          <div key={index}>
                                         <MenuItem key={index}
                                                   onClick={() => handleMenuItemClick(item)} 
-                                                  selected={item === org} >
+                                                  selected={item === org}  sx={{justifyContent: 'center'}}>
                                         <Tooltip title={item}>   
                                         <Typography  noWrap>{item}</Typography>
                                         </Tooltip> 
@@ -232,7 +234,7 @@ const Header = () => {
                            
                             </Tooltip>
                              {/* Render Badge in the same row as Chip */}
-                            { false &&
+                            { true &&
                                       <Tooltip title="notification">
                                       <IconButton sx={{ mr: 30, color: 'primary'}}>
                                           <Badge badgeContent={4} color="secondary" variant=''>

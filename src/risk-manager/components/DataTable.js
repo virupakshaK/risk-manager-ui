@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import TablePaginationActions from './TablePaginationActions'
 import { TableHead } from '@mui/material';
 import { Box } from '@mui/system';
+import useBreakpoints from './useBreakpoints';
 
 
 
@@ -30,11 +31,15 @@ import { Box } from '@mui/system';
     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: 10, lastName: 'Roxie', firstName: 'Harward', age: 65 },
+    { id: 11, lastName: 'Romio', firstName: 'Harvey', age: 65 },
+    { id: 12, lastName: 'Roxii', firstName: 'Hnaka', age: 65 },
   ];
   
 
  const DataTable = () => {
-  
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -54,10 +59,10 @@ import { Box } from '@mui/system';
 
     return (
       <Box sx={{display: 'flex'}}>
-      <TableContainer component={Paper} sx={{     m: 1,
+      <TableContainer                   sx={{     m: 1,
                                                   width: '100%',
-                                            
-                                                  maxHeight: '65vh',
+                                                  height: isMd ? '65vh' : isLg ? '79vh' : '70%',
+                                                  maxHeight: isMd ? '80vh': isLg ? '85vh' : '85vh',
                                                   overflowY: 'auto',
                                                   overflowX: 'auto',
                                                   position: 'relative',
@@ -75,7 +80,7 @@ import { Box } from '@mui/system';
                                                 '&::-webkit-scrollbar-track': {
                                                     backgroundColor: '#f1f1f1',
                                                 }, }}>
-       <Table sx={{minWidth: 700}} aria-label="custom pagination table" >
+       <Table component={Paper} sx={{minWidth: 700}} aria-label="custom pagination table" >
          <TableHead sx={{bgcolor:'#F5F5F5',
                          position: 'sticky',
                          top: 0,

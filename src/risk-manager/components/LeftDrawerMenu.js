@@ -1,33 +1,23 @@
 
-import * as React from 'react';
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-
-import List from '@mui/material/List';
-
-
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-
-import AccessMangementMenu from './AccessMangementMenu';
-import CaseManagementMenu from '../case-management/CaseManagementMenu';
+import AccessMangementMenu from './access-management/AccessMangementMenu';
+import CaseManagementMenu from './case-management/CaseManagementMenu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Tooltip from '@mui/material/Tooltip';
-import { useTabContext } from '../TabContext';
-import BackOfficeMenu from '../backoffice/BackOfficeMenu';
-import AdminMenu from '../admin/AdminMenu';
+import { useTabContext } from './TabContext';
+import BackOfficeMenu from './backoffice/BackOfficeMenu';
+import AdminMenu from './admin/AdminMenu';
 
 
-const drawerWidth = 240;
-const appBarHeight = '80px'; // Adjust based on your AppBar height
+const drawerWidth = 245;
+const appBarHeight = '85px'; // Adjust based on your AppBar height
 const minimizedWidth = '60px'; // Width when minimized
 const openedMixin = (theme) => ({
   width: drawerWidth,

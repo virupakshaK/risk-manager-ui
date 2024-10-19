@@ -93,10 +93,10 @@ const CaseManagementMenu = ({open}) => {
             {item.subMenu.map((subItem, subIndex) => (
               <ListItem key={subIndex} disablePadding sx={{ pl: 4 }}>
                 <ListItemButton component={Link} to={subItem.path}>
-                  <ListItemIcon>
+                  <ListItemIcon sx={{minWidth:'35px'}}>
                     {subItem.icon && <subItem.icon fontSize='medium' />}
                   </ListItemIcon>
-                  <ListItemText primary={subItem.title} />
+                  <ListItemText sx={{pl:'2px'}} primary={subItem.title} />
                 </ListItemButton>
               </ListItem>
             ))}

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, Grid, InputLabel, Menu, MenuItem, Select, TextField } from '@mui/material';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base';
 import { styled } from '@mui/system';
-
+import useBreakpoints from '../useBreakpoints';
 
 export const RuleInfo = () => {
+  const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const [status, setStatus] = useState('');
   const [channel, setChannel] = useState('');
   const [eventType, setEventType] = useState('');
@@ -74,8 +75,8 @@ const handleEventType = (event) => {
 
   return (
     <Grid container sx={{ width: '95%',
-                          height: '60vh',
-                          maxHeight: '40vh',
+    height: isMd ? '40%' : isLg ? '50%' : '60%',
+    maxHeight: isMd ? '40vh' : isLg ? '60vh' : '65vh',
                           overflowY: 'auto',
                           overflowX: 'auto',
                           ml: 2,
@@ -126,12 +127,14 @@ const handleEventType = (event) => {
    <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
     <InputLabel id="demo-simple-select-autowidth-label">Event Type</InputLabel>
      <Select
-      labelId="demo-simple-select-label"
+      labelId="demo-simple-select-autowidth-label"
       id="demo-simple-select"
       value={eventType}
       label="Event Type"
       onChange={handleEventType}
+      
     >
+     
       <MenuItem value={1}>ACTIVE CARD</MenuItem>
       <MenuItem value={2}>ADD PAYEE</MenuItem>
       <MenuItem value={3}>CARD PIN CHANGE</MenuItem>
