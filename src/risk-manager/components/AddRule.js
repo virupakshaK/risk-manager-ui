@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Card } from '@mui/material';
 import RuleConditions from './RuleConditions';
 import { RuleInfo } from './backoffice/RuleInfo';
+import ReviewRuleDetails  from './backoffice/ReviewRuleDetails';
 const steps = ['Define Rule', 'Conditions', 'Actions'];
 
 
@@ -15,6 +16,9 @@ export const AddRule = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
+
+    const [ruleInfo, setRuleInfo] = useState({'ruleName': '', 'channel': '', 'eventType':'', 'status': '', 'sampleSize':'', 'order':'', 'description': '', 'comments':''});
+    const [ruleConditions, setRuleConditions] = useState({});
 
     const totalSteps = () => {
         return steps.length;
@@ -68,11 +72,11 @@ export const AddRule = () => {
       const getStepContent = (step) => {
         switch (step) {
           case 0:
-            return <RuleInfo />;
+            return <RuleInfo data={ruleInfo} setData={setRuleInfo} />;
           case 1:
-            return <RuleConditions />;
+            return <RuleConditions data={ruleConditions} setData={setRuleConditions} />;
           case 2:
-            return 'Step 3';
+            return <ReviewRuleDetails ruleInfo={ruleInfo} ruleConditions={ruleConditions} />;
           default:
             return <Typography>Unknown Step</Typography>;
         }

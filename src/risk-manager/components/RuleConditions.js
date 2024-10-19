@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, Box, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Tooltip, createTheme } from '@mui/material';
+import { TextField, Button, Select, MenuItem, Box, Typography, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Tooltip } from '@mui/material';
 //import axios from 'axios';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,15 +11,17 @@ const operators = ["AND", "OR"];
 const fields = ["Name", "Age", "Country"];
 const conditions = ["Equals", "Not Equals", "Contains"];
 
-const RuleConditions = () => {
+const RuleConditions = ({ data, setData }) => {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const [query, setQuery] = useState({ id: 1, conditions: [] });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [itemToRemove, setItemToRemove] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false); 
 
   const addCondition = (group) => {
     group.conditions.push({ field: "", condition: "", value: "", operator: "" });
     setQuery({ ...query });
+    handleConditionChange(query);
   };
 
   const addGroup = (group) => {
@@ -28,11 +30,17 @@ const RuleConditions = () => {
       group: { id: Date.now(), conditions: [] },
     });
     setQuery({ ...query });
-  };
 
+    handleConditionChange(query);
+  };
+  const handleConditionChange = (updatedConditions) => {
+    setData({ ...data, ...updatedConditions });
+  };
   const updateCondition = (group, index, key, value) => {
     group.conditions[index][key] = value;
     setQuery({ ...query });
+    handleConditionChange(query);
+    
   };
 
   const confirmRemove = (group, index) => {
@@ -44,25 +52,13 @@ const RuleConditions = () => {
     const { group, index } = itemToRemove;
     group.conditions.splice(index, 1);
     setQuery({ ...query });
+    handleConditionChange(query);
     setDialogOpen(false);
     setItemToRemove(null);
   };
 
 
   const renderConditions = (group) => {
-
-    const theme = createTheme({
-      breakpoints: {
-          values: {
-            xs: 0,
-            sm: 600,
-            md: 1281,
-            lg: 1981,
-            xl: 1990,
-          },
-      },
-  });
-
 
 
     return group.conditions.map((q, index) => (
@@ -156,20 +152,9 @@ const RuleConditions = () => {
 
   const handleSubmit = (e) => {
     // Convert query to JSON string
-    const queryPayload = JSON.stringify(query);
+   // const queryPayload = JSON.stringify(query);
     e.preventDefault();
-    // Send the payload to the backend service
-   { /*axios.post('https://your-backend-api.com/query', queryPayload, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log('Query submitted successfully:', response.data);
-    })
-    .catch(error => {
-      console.error('Error submitting query:', error);
-    });*/}
+    setModalOpen(true); 
   };
 
   return (
@@ -204,8 +189,41 @@ const RuleConditions = () => {
       </Button>
 
       <Button variant="outlined" onClick={handleSubmit} >
-        Submit Rule
+        Review Rule Conditions
       </Button>
+
+      {/* Modal to display query data */}
+    <Dialog 
+      open={modalOpen} 
+      onClose={() => setModalOpen(false)} 
+      maxWidth="md" // Adjust this value as needed
+      fullWidth // Makes the dialog full width within the maxWidth
+    >
+          <DialogTitle>Review Conditions</DialogTitle>
+          <DialogContent
+                         >
+            <Typography>Query Data:</Typography>
+            <pre>{JSON.stringify(query, null, 2)}</pre>
+          </DialogContent>
+          <DialogActions>
+            <Button 
+              onClick={() => setModalOpen(false)} 
+              size="large" // Make the button larger
+              variant="outlined" 
+            >
+              Close
+            </Button>
+            <Button 
+              onClick={() => {setModalOpen(false)}} 
+              size="large" // Make the button larger
+              variant="contained" // You can use "outlined" or "contained" based on your design preference
+              color="primary" // Color can be adjusted based on your theme
+            >
+              Ok
+            </Button>
+          </DialogActions>
+       </Dialog>
+
 
       {/* Confirmation Dialog */}
       <Dialog

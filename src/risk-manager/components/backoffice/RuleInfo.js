@@ -4,7 +4,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base';
 import { styled } from '@mui/system';
 import useBreakpoints from '../useBreakpoints';
 
-export const RuleInfo = () => {
+export const RuleInfo = ({ data, setData }) => {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
   const [status, setStatus] = useState('');
   const [channel, setChannel] = useState('');
@@ -62,21 +62,16 @@ export const RuleInfo = () => {
   `,
   );
 
-  const handleStatusChange = (event) => {
-    setStatus(event.target.value);
+  const handleInputChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
-const handleChannel = (event) => {
-  setChannel(event.target.value)
-}
-const handleEventType = (event) => {
-  setEventType(event.target.value)
-}
+
 
   return (
     <Grid container sx={{ width: '95%',
     height: isMd ? '40%' : isLg ? '50%' : '60%',
-    maxHeight: isMd ? '40vh' : isLg ? '60vh' : '65vh',
+    maxHeight: isMd ? '40vh' : isLg ? '56vh' : '65vh',
                           overflowY: 'auto',
                           overflowX: 'auto',
                           ml: 2,
@@ -99,7 +94,7 @@ const handleEventType = (event) => {
  
    <Grid md={4} item>
    <FormControl sx={{ m: 1, minWidth: 120, width:'40vh' }} >
-     <TextField id="outlined-basic" label="Rule Name" variant="outlined" />
+     <TextField id="outlined-basic" name='ruleName' label="Rule Name"  value={data.ruleName || ''} onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
    
@@ -109,9 +104,10 @@ const handleEventType = (event) => {
      <Select
       labelId="demo-simple-select-autowidth-label"
       id="demo-simple-select"
-      value={channel}
+      name='channel'
+      value={data.channel || ''} onChange={handleInputChange}
       label="Channel"
-      onChange={handleChannel}
+      
     >
       <MenuItem value={1}>ATM</MenuItem>
       <MenuItem value={2}>BRANCH</MenuItem>
@@ -129,10 +125,10 @@ const handleEventType = (event) => {
      <Select
       labelId="demo-simple-select-autowidth-label"
       id="demo-simple-select"
-      value={eventType}
+      value={data.eventType || ''}
       label="Event Type"
-      onChange={handleEventType}
-      
+      onChange={handleInputChange}
+      name='eventType'
     >
      
       <MenuItem value={1}>ACTIVE CARD</MenuItem>
@@ -167,9 +163,10 @@ const handleEventType = (event) => {
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
-      value={status}
+      name='status'
+      value={data.status || ''}
       label="Status"
-      onChange={handleStatusChange}
+      onChange={handleInputChange}
       required
     >
       <MenuItem value={1}>Work In Progress</MenuItem>
@@ -180,22 +177,22 @@ const handleEventType = (event) => {
   </Grid>
    <Grid md={4} item>
    <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <TextField id="outlined-basic" label="Order" variant="outlined" />
+     <TextField id="outlined-basic" label="Order" name='order' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
    <Grid md={4} item>
    <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <TextField id="outlined-basic" label="Sample Size" variant="outlined" />
+     <TextField id="outlined-basic" label="Sample Size" name='sampleSize' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
      <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <Textarea name='description' aria-label="minimum height" minRows={2} placeholder="Description 2 rows" />
+     <Textarea name='description' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Description 2 rows" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
      <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <Textarea name='comments' aria-label="minimum height" minRows={2} placeholder="Comments 2 rows" />
+     <Textarea name='comments' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Comments 2 rows" />
      </FormControl>
 
      </Grid>

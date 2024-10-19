@@ -120,7 +120,7 @@ export const Auth = () => {
               {error && <Typography variant="h7" color="error">{error}</Typography>}
               <form onSubmit={handleLoginSubmit}>
               <Grid container direction="column" spacing={2} sx={{ alignItems: 'center' }}>
-                  <Grid item>
+              <Grid item>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -131,7 +131,9 @@ export const Auth = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
+                        <IconButton >
                         <AccountCircle />
+                        </IconButton>
                       </InputAdornment>
                     ),
                   }}
