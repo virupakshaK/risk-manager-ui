@@ -93,13 +93,13 @@ export const RuleInfo = ({ data, setData }) => {
   >
  
    <Grid md={4} item>
-   <FormControl sx={{ m: 1, minWidth: 120, width:'40vh' }} >
-     <TextField id="outlined-basic" name='ruleName' label="Rule Name"  value={data.ruleName || ''} onChange={handleInputChange} variant="outlined" />
+    <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }} >
+        <TextField id="outlined-basic" name='ruleName' label="Rule Name"  value={data.ruleName || ''} onChange={handleInputChange} variant="outlined" />
      </FormControl>
-     </Grid>
+  </Grid>
    
    <Grid md={4} item> 
-   <FormControl sx={{ m: 1, minWidth: 120, width:'40vh' }} >
+   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }} >
     <InputLabel id="demo-simple-select-autowidth-label">Channel</InputLabel>
      <Select
       labelId="demo-simple-select-autowidth-label"
@@ -107,7 +107,26 @@ export const RuleInfo = ({ data, setData }) => {
       name='channel'
       value={data.channel || ''} onChange={handleInputChange}
       label="Channel"
-      
+      MenuProps={{
+        PaperProps: {
+          style: {
+            maxHeight: 230, // Set a max height for the dropdown
+            width: '45vh', 
+          },
+        },
+        sx: {
+          '& .MuiMenuItem-root': {
+            whiteSpace: 'nowrap',
+          },
+          '& .MuiPaper-root::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '& .MuiPaper-root::-webkit-scrollbar-thumb': {
+            backgroundColor: '#ccc',
+            borderRadius: '4px',
+          },
+        },
+      }}
     >
       <MenuItem value={1}>ATM</MenuItem>
       <MenuItem value={2}>BRANCH</MenuItem>
@@ -120,16 +139,36 @@ export const RuleInfo = ({ data, setData }) => {
   </FormControl>
   </Grid>
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-    <InputLabel id="demo-simple-select-autowidth-label">Event Type</InputLabel>
-     <Select
-      labelId="demo-simple-select-autowidth-label"
-      id="demo-simple-select"
-      value={data.eventType || ''}
-      label="Event Type"
-      onChange={handleInputChange}
-      name='eventType'
-    >
+   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }}>
+  <InputLabel id="demo-simple-select-autowidth-label">Event Type</InputLabel>
+  <Select
+    labelId="demo-simple-select-autowidth-label"
+    id="demo-simple-select"
+    value={data.eventType || ''}
+    label="Event Type"
+    onChange={handleInputChange}
+    name="eventType"
+    MenuProps={{
+      PaperProps: {
+        style: {
+          maxHeight: 230, // Set a max height for the dropdown
+          width: '45vh', 
+        },
+      },
+      sx: {
+        '& .MuiMenuItem-root': {
+          whiteSpace: 'nowrap',
+        },
+        '& .MuiPaper-root::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '& .MuiPaper-root::-webkit-scrollbar-thumb': {
+          backgroundColor: '#ccc',
+          borderRadius: '4px',
+        },
+      },
+    }}
+  >
      
       <MenuItem value={1}>ACTIVE CARD</MenuItem>
       <MenuItem value={2}>ADD PAYEE</MenuItem>
@@ -158,7 +197,7 @@ export const RuleInfo = ({ data, setData }) => {
   </Grid>
 
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
      <InputLabel id="demo-simple-select-label">Status </InputLabel>
     <Select
       labelId="demo-simple-select-label"
@@ -176,23 +215,23 @@ export const RuleInfo = ({ data, setData }) => {
   </FormControl>
   </Grid>
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
      <TextField id="outlined-basic" label="Order" name='order' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
      <TextField id="outlined-basic" label="Sample Size" name='sampleSize' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
-     <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <Textarea name='description' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Description 2 rows" />
+     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
+     <Textarea sx={{width: isMd ? '50vh' : isLg ? '56vh' : '65vh'}} name='description' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Description 2 rows" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
-     <FormControl sx={{m: 1, minWidth: 120, width:'40vh'  }} >
-     <Textarea name='comments' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Comments 2 rows" />
+     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
+     <Textarea sx={{width: isMd ? '50vh' : isLg ? '56vh' : '65vh'}} name='comments' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Comments 2 rows" />
      </FormControl>
 
      </Grid>
