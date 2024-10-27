@@ -30,7 +30,7 @@ const RuleConditions = ({ data, setData }) => {
       group: { id: Date.now(), conditions: [] },
     });
     setQuery({ ...query });
-
+    console.log(query)
     handleConditionChange(query);
   };
   const handleConditionChange = (updatedConditions) => {

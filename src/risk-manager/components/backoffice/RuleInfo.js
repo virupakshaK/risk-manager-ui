@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { FormControl, Grid, InputLabel, Menu, MenuItem, Select, TextField } from '@mui/material';
+import React from 'react';
+import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base';
 import { styled } from '@mui/system';
 import useBreakpoints from '../useBreakpoints';
 
 export const RuleInfo = ({ data, setData }) => {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
-  const [status, setStatus] = useState('');
-  const [channel, setChannel] = useState('');
-  const [eventType, setEventType] = useState('');
+
 
   const blue = {
     100: '#DAECFF',
@@ -93,13 +91,13 @@ export const RuleInfo = ({ data, setData }) => {
   >
  
    <Grid md={4} item>
-    <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }} >
+    <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh' }} >
         <TextField id="outlined-basic" name='ruleName' label="Rule Name"  value={data.ruleName || ''} onChange={handleInputChange} variant="outlined" />
      </FormControl>
   </Grid>
    
    <Grid md={4} item> 
-   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }} >
+   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh' }} >
     <InputLabel id="demo-simple-select-autowidth-label">Channel</InputLabel>
      <Select
       labelId="demo-simple-select-autowidth-label"
@@ -139,7 +137,7 @@ export const RuleInfo = ({ data, setData }) => {
   </FormControl>
   </Grid>
    <Grid md={4} item>
-   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh' }}>
+   <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh' }}>
   <InputLabel id="demo-simple-select-autowidth-label">Event Type</InputLabel>
   <Select
     labelId="demo-simple-select-autowidth-label"
@@ -197,7 +195,7 @@ export const RuleInfo = ({ data, setData }) => {
   </Grid>
 
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh'  }} >
      <InputLabel id="demo-simple-select-label">Status </InputLabel>
     <Select
       labelId="demo-simple-select-label"
@@ -215,23 +213,23 @@ export const RuleInfo = ({ data, setData }) => {
   </FormControl>
   </Grid>
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh'  }} >
      <TextField id="outlined-basic" label="Order" name='order' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
    <Grid md={4} item>
-   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
+   <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh'  }} >
      <TextField id="outlined-basic" label="Sample Size" name='sampleSize' onChange={handleInputChange} variant="outlined" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
-     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
-     <Textarea sx={{width: isMd ? '50vh' : isLg ? '56vh' : '65vh'}} name='description' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Description 2 rows" />
+     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh'  }} >
+     <Textarea sx={{width: isMd ? '45vh' : isLg ? '56vh' : '65vh'}} name='description' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Description 2 rows" />
      </FormControl>
      </Grid>
      <Grid md={4} item>
-     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '50vh' : isLg ? '56vh' : '65vh'  }} >
-     <Textarea sx={{width: isMd ? '50vh' : isLg ? '56vh' : '65vh'}} name='comments' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Comments 2 rows" />
+     <FormControl sx={{m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh'  }} >
+     <Textarea sx={{width: isMd ? '45vh' : isLg ? '56vh' : '65vh'}} name='comments' aria-label="minimum height" onChange={handleInputChange} minRows={2} placeholder="Comments 2 rows" />
      </FormControl>
 
      </Grid>
