@@ -17,7 +17,7 @@ export const AddRule = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
 
-    const [ruleInfo, setRuleInfo] = useState({'ruleName': '', 'channel': '', 'eventType':'', 'status': '', 'sampleSize':'', 'order':'', 'description': '', 'comments':''});
+    const [ruleInfo, setRuleInfo] = useState({'ruleName': '', 'channel': '', 'eventType':'', 'status': '', 'sampleSize':'', 'order':'', 'description': '', 'comments':'', 'ruleInheritToChild': false});
     const [ruleConditions, setRuleConditions] = useState({id: 1, conditions: []});
 
     const totalSteps = () => {

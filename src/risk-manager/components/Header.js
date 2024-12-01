@@ -8,6 +8,7 @@ import SettingsPowerIcon from '@mui/icons-material/SettingsPower';
 import { useNavigate } from 'react-router-dom';
 import MailIcon from '@mui/icons-material/Mail';
 import useBreakpoints from './useBreakpoints';
+import NotificationWithModal from './backoffice/NotificationWithModal';
 
 const Header = () => {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
@@ -235,13 +236,7 @@ const Header = () => {
                             </Tooltip>
                              {/* Render Badge in the same row as Chip */}
                             { true &&
-                                      <Tooltip title="notification">
-                                      <IconButton sx={{ mr: 30, color: 'primary'}}>
-                                          <Badge badgeContent={4} color="secondary" variant=''>
-                                            <MailIcon fontSize='small' color="primary"  />
-                                          </Badge>
-                                      </IconButton>
-                                      </Tooltip>
+                                      <NotificationWithModal />
                                 }
                             </Box>
 
