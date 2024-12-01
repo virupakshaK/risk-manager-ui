@@ -22,7 +22,7 @@ const Header = () => {
                         }
 
     const tabsList = ['AccessManagement', 'CaseManagement', 'BackOffice', 'Admin'];
-    const settings = ['default', 'TestOrgShc', "bbh", "bbc", 'testOrgSch1btestOutseer'];
+    const settings = ['default', 'TestOrgShc', 'bbh', 'bbc', 'testOrgSch1btestOutseer'];
     //const [activeTab, setActiveTab] = useState(0);
     const { activeTab, setActiveTab } = useTabContext(); // Access the activeTab and setActiveTab
     const [org, setOrg] = useState('default');

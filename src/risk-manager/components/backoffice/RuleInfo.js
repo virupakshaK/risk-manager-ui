@@ -98,13 +98,13 @@ export const RuleInfo = ({ data, setData }) => {
    
    <Grid md={4} item> 
    <FormControl sx={{ m: 1, minWidth: 120, width: isMd ? '45vh' : isLg ? '56vh' : '65vh' }} >
-    <InputLabel id="demo-simple-select-autowidth-label">Channel</InputLabel>
+    <InputLabel id="demo-simple-select-autowidth-label">Channel Name</InputLabel>
      <Select
       labelId="demo-simple-select-autowidth-label"
       id="demo-simple-select"
       name='channel'
       value={data.channel || ''} onChange={handleInputChange}
-      label="Channel"
+      label="Channel Name"
       MenuProps={{
         PaperProps: {
           style: {

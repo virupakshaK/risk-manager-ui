@@ -18,7 +18,7 @@ export const AddRule = () => {
     const [completed, setCompleted] = useState({});
 
     const [ruleInfo, setRuleInfo] = useState({'ruleName': '', 'channel': '', 'eventType':'', 'status': '', 'sampleSize':'', 'order':'', 'description': '', 'comments':''});
-    const [ruleConditions, setRuleConditions] = useState({});
+    const [ruleConditions, setRuleConditions] = useState({id: 1, conditions: []});
 
     const totalSteps = () => {
         return steps.length;
@@ -84,27 +84,29 @@ export const AddRule = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-        <Card sx={{ m: 1,
-                       width: '95%',
-                       p: '15px',
-                       maxHeight: '65vh'}}>
-    <Stepper nonLinear activeStep={activeStep} sx={{width: '100%'}}>
-      {steps.map((label, index) => (
-        <Step key={label} completed={completed[index]}>
-          <StepButton color="inherit" onClick={handleStep(index)}>
-            {label}
-          </StepButton>
-        </Step>
-      ))}
-    </Stepper>
+    <Card sx={{ m: 1,
+                    width: '95%',
+                    p: '15px',
+                    maxHeight: '65vh'}}>
+
+                      <Stepper nonLinear activeStep={activeStep} sx={{width: '100%'}}>
+                        {steps.map((label, index) => (
+                          <Step key={label} completed={completed[index]}>
+                            <StepButton color="inherit" onClick={handleStep(index)}>
+                              {label}
+                            </StepButton>
+                          </Step>
+                        ))}
+                      </Stepper>
      </Card> 
      <Card sx={{    m: 1,
                     width: '95%',
+                    
                     maxHeight: '65vh',
                     pr: '15px',
                     pl: '15px'
                      }}> 
-    <div>
+   
       {allStepsCompleted() ? (
         <React.Fragment>
            
@@ -128,7 +130,6 @@ export const AddRule = () => {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb:'20px' }}>
             <Button
-              
               disabled={activeStep === 0}
               onClick={handleBack}
               sx={{ mr: 1 }}
@@ -136,10 +137,13 @@ export const AddRule = () => {
             >
               Back
             </Button>
+
             <Box sx={{ flex: '1 1 auto' }} />
+
             <Button onClick={handleNext} sx={{ mr: 1 }} variant='outlined'>
               Next
             </Button>
+
             {activeStep !== steps.length &&
               (completed[activeStep] ? (
                 <Typography variant="caption" sx={{ display: 'inline-block' }}>
@@ -156,7 +160,6 @@ export const AddRule = () => {
           
         </React.Fragment>
       )}
-    </div>
     </Card>
   </Box>
   );

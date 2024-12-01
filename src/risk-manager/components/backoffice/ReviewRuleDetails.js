@@ -63,7 +63,7 @@ const ReviewRuleDetails = ({ ruleInfo, ruleConditions }) => {
       sx={{
         m: 1,
         width: '100%',
-        height: isMd ? '41vh' : isLg ? '65vh' : '75%',
+        height: isMd ? '38vh' : isLg ? '65vh' : '75%',
         maxHeight: isMd ? '60vh' : isLg ? '75vh' : '85vh',
         overflowY: 'auto',
         overflowX: 'auto',

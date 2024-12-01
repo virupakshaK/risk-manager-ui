@@ -7,6 +7,7 @@ import DataTable from './risk-manager/components/DataTable.js';
 import { PageNotFound } from './risk-manager/components/PageNotFound.js';
 import { ResearchActivitiesTable } from './risk-manager/components/case-management/ResearchActivitiesTable.js';
 import { TransferList } from './risk-manager/components/TransferList.js';
+import { ResearchActivities } from './risk-manager/components/case-management/ResearchActivities.js';
 
 //import Login from './risk-manager/Login.js';
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="processqueue" element={<ResearchActivitiesTable />} />
           <Route path="customqueue" element={<TransferList />} />
           <Route path="lookupuser" element={<DataTable />} />
-          <Route path="researchActivities" element={<ResearchActivitiesTable />} />
+          <Route path="researchActivities" element={<ResearchActivities />} />
           <Route path="manage" element={<AddRule />} />
           
           <Route path="*" element={<PageNotFound />} />

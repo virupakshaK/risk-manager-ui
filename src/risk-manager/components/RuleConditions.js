@@ -13,7 +13,7 @@ const conditions = ["Equals", "Not Equals", "Contains"];
 
 const RuleConditions = ({ data, setData }) => {
   const { isXs, isSm, isMd, isLg, isXl } = useBreakpoints();
-  const [query, setQuery] = useState({ id: 1, conditions: [] });
+  const [query, setQuery] = useState({ ...data });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [itemToRemove, setItemToRemove] = useState(null);
   const [modalOpen, setModalOpen] = useState(false); 
@@ -33,9 +33,11 @@ const RuleConditions = ({ data, setData }) => {
     console.log(query)
     handleConditionChange(query);
   };
+  
   const handleConditionChange = (updatedConditions) => {
     setData({ ...data, ...updatedConditions });
   };
+
   const updateCondition = (group, index, key, value) => {
     group.conditions[index][key] = value;
     setQuery({ ...query });
