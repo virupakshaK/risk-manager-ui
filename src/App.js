@@ -8,6 +8,8 @@ import { PageNotFound } from './risk-manager/components/PageNotFound.js';
 import { ResearchActivitiesTable } from './risk-manager/components/case-management/ResearchActivitiesTable.js';
 import { TransferList } from './risk-manager/components/TransferList.js';
 import { ResearchActivities } from './risk-manager/components/case-management/ResearchActivities.js';
+import { AddUser } from './risk-manager/components/access-management/AddUser.js';
+import UserListDetails from './risk-manager/components/access-management/UserListDetails.js';
 
 //import Login from './risk-manager/Login.js';
 const App = () => {
@@ -20,8 +22,9 @@ const App = () => {
 
         {/* Access Management Section */}
         <Route path="/accessmanagement" element={<Layout />}>
-          <Route index element={<TransferList />} /> {/* Default route */}
-          <Route path="users" element={<AddRule />} />
+          <Route index element={<UserListDetails />} /> {/* Default route */}
+          <Route path="users" element={<UserListDetails />} />
+          <Route path="addUser" element={<AddUser />} />
           <Route path="useActivities" element={<ResearchActivitiesTable />} />
           <Route path="groups" element={<DataTable />} />
           <Route path="orgs" element={<TransferList />} />

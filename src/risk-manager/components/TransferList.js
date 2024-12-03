@@ -17,7 +17,7 @@ function not(a, b) {
 export const TransferList = () => {
     const [checked, setChecked] = useState([]);
     const [left, setLeft] = useState([0, 1, 2, 3]);
-    const [right, setRight] = useState([4, 5, 6, 7]);
+    const [right, setRight] = useState([4, 5, 6,7]);
   
     const leftChecked = intersection(checked, left);
     const rightChecked = intersection(checked, right);
@@ -79,10 +79,10 @@ export const TransferList = () => {
           <Divider />
           <List
             sx={{
-              width: 200,
-              height: 230,
+              width: 160,
+              height: 200,
               bgcolor: 'background.paper',
-              overflow: 'auto',
+              overflow: 'auto'
             }}
             dense
             component="div"
@@ -117,36 +117,47 @@ export const TransferList = () => {
 
   return (
     <Grid
+  container
+  sx={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    width: '100%',
+  }}
+>
+  <Grid item>{customList('Choices', left)}</Grid>
+  <Grid item>
+    <Grid
       container
-      spacing={2}
-      sx={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: '70vh' }}
+      direction="column"
+      sx={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1,
+      }}
     >
-      <Grid item>{customList('Choices', left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" sx={{ alignItems: 'center' }}>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid item>{customList('Chosen', right)}</Grid>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={handleCheckedRight}
+        disabled={leftChecked.length === 0}
+        aria-label="move selected right"
+      >
+        &gt;
+      </Button>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={handleCheckedLeft}
+        disabled={rightChecked.length === 0}
+        aria-label="move selected left"
+      >
+        &lt;
+      </Button>
     </Grid>
-  )
+  </Grid>
+  <Grid item>{customList('Chosen', right)}</Grid>
+</Grid>
+ )
 }
