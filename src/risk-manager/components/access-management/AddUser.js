@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Card, FormControl, Grid, TextField, Typography } from '@mui/material'
 import useBreakpoints from '../useBreakpoints';
-import { Box, display } from '@mui/system';
+import { Box } from '@mui/system';
 import { TransferList } from '../TransferList';
 import { Link } from 'react-router-dom';
 
